@@ -7,14 +7,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typed from 'react-typed';
+import {useIMQA} from "imqa-react-sdk";
 
 const Hero = () => {
+    const IMQARef = useIMQA(); // 삽입
     const theme = useTheme();
 
     const isMd = useMediaQuery(theme.breakpoints.up('md'), {
         defaultMatches: true,
     });
     return (
+        <div ref={IMQARef}>
         <Grid container spacing={4}>
             <Grid item container xs={12} md={6} alignItems={'center'}>
                 <Box data-aos={isMd ? 'fade-right' : 'fade-up'} paddingLeft={isMd && 2} p={1}>
@@ -103,6 +106,7 @@ const Hero = () => {
                 />
             </Grid>
         </Grid>
+        </div>
     )
 }
 

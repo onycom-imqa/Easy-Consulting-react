@@ -4,14 +4,17 @@ import './Contact.css';
 import contactImg from '../../../Assets/contact.svg';
 // import swal from 'sweetalert'
 import Fade from 'react-reveal/Fade';
+import {useIMQA} from "imqa-react-sdk";
 
 const Contact = () => {
+    const IMQARef = useIMQA(); // 삽입
     const handleSubmit = event => {
         event.preventDefault();
         event.target.reset();
         // swal("Thank You!", "We appreciate you contacting us!", "success");
     }
     return (
+        <div ref={IMQARef}>
         <section id="contact">
             <Col md={11} className="mx-auto">
                 <Row>
@@ -46,6 +49,7 @@ const Contact = () => {
                 </Row>
             </Col>
         </section>
+        </div>
     );
 };
 

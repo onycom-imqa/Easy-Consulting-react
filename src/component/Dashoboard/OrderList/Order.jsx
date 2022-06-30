@@ -1,14 +1,17 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import './Order.css'
+import {useIMQA} from "imqa-react-sdk";
 
 const Order = ({order, handleAction}) => {
+    const IMQARef = useIMQA(); // 삽입
     const {_id, name, email, serviceName, status} = order;
     const setBackground = {
         color: '#FFFFFF',
         background: status === 'Pending' ? 'rgb(255 78 96)' : status === 'On going' ? 'rgb(73 146 255)' :'rgb(31 204 123)'
     }
     return (
+        <div ref={IMQARef}>
         <tr>
             <td>{name}</td>
             <td>{email}</td>
@@ -26,7 +29,7 @@ const Order = ({order, handleAction}) => {
                 </Dropdown>
             </td>
         </tr>
-    
+        </div>
     );
 };
 

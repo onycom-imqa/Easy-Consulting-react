@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import SocialMedia from './SocialMedia';
 import toast from 'react-hot-toast';
+import {useIMQA} from "imqa-react-sdk";
 
 const SignUpForm = ({handleResponse}) => {
+    const IMQARef = useIMQA(); // 삽입
     const { register, handleSubmit, formState: { errors } } = useForm();
-    
+
     const onSubmit = ({email, password}) => {
         const loading = toast.loading('Please wait...');
         createAccount(email, password)
@@ -22,6 +24,7 @@ const SignUpForm = ({handleResponse}) => {
         })
     }
     return (
+        <div ref={IMQARef}>
         <form onSubmit={handleSubmit(onSubmit)} className="sign-up-form">
             <h2 className="title">Sign Up</h2>
             <div className="input-field">
@@ -41,6 +44,7 @@ const SignUpForm = ({handleResponse}) => {
             <p className="social-text">Or Sign up with social account</p>
             <SocialMedia handleResponse={handleResponse}/>
         </form>
+        </div>
     );
 };
 

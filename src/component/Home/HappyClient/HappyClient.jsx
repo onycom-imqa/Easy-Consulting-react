@@ -3,7 +3,9 @@ import './HappyClient.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faSmileBeam, faTasks, faHeadset, faUsers } from '@fortawesome/free-solid-svg-icons';
 import CountUp from 'react-countup';
+import {useIMQA} from "imqa-react-sdk";
 const HappyClient = () => {
+    const IMQARef = useIMQA(); // 삽입
     const workDetails = [
         { title: 'Happy Clients', number: 542, id: 1 },
         { title: 'Projects', number: 623, id: 2 },
@@ -11,6 +13,7 @@ const HappyClient = () => {
         { title: 'Hard Workers', number: 31, id: 4 }
     ]
     return (
+        <div ref={IMQARef}>
         <section className="ourValue">
             <div className="row container mx-auto">
                 {
@@ -36,6 +39,7 @@ const HappyClient = () => {
                 }
             </div>
         </section>
+        </div>
     )
 }
 

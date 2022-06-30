@@ -8,10 +8,13 @@ import { usefulLink, ourServices, otherLinks, footerInfo } from '../../FooterDat
 import FooterInfo from './FooterInfo';
 import { Link } from 'react-router-dom';
 import { scrollUP } from '../../Shared/ScrollTop/ScrollTop';
+import {useIMQA} from "imqa-react-sdk";
 
 
 const Footer = () => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <section className='row footer'>
             <Row className="col-md-11 mx-auto">
                 <Row className="align-items-center footerInfo">
@@ -52,6 +55,7 @@ const Footer = () => {
             </Row>
             <p className="copyRight">Copyright &copy; 2021 <span className="fHighlight">Ujjal zaman</span>. All rights reserved.</p>
         </section>
+        </div>
     );
 };
 

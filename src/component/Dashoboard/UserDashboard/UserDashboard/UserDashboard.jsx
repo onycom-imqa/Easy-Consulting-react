@@ -5,8 +5,11 @@ import BookList from '../BookList/BookList'
 import Book from '../Book/Book'
 import Review from '../AddReview/Review';
 import ReviewForm from '../AddReview/ReviewFrom'
+import {useIMQA} from "imqa-react-sdk";
 const UserDashboard = () => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <Routes>
             <Route path="profile" element={<Profile />} />
             <Route path="book" element={<Book />} />
@@ -15,6 +18,7 @@ const UserDashboard = () => {
             <Route path="review" element={<Review />} />
             <Route path="review/:id" element={<ReviewForm />} />
         </Routes>
+        </div>
     )
 }
 

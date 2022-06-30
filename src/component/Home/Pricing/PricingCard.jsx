@@ -3,9 +3,12 @@ import { Col, Row, Tab } from 'react-bootstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Fade from 'react-reveal/Fade';
+import {useIMQA} from "imqa-react-sdk";
 
 const PricingCard = ({data, id}) => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <Tab.Pane eventKey={id + 1}>
             <Row>
                 {
@@ -45,6 +48,7 @@ const PricingCard = ({data, id}) => {
                 }
             </Row>
         </Tab.Pane>
+        </div>
     );
 };
 

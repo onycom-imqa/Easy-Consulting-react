@@ -2,16 +2,19 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Service from './Service';
 import Spinner from '../../Shared/Spinner/Spinner';
+import {useIMQA} from "imqa-react-sdk";
 
 const Services = () => {
+    const IMQARef = useIMQA(); // 삽입
     const [services, setServices] = useState([])
-    
+
     useEffect(() => {
         axios.get('https://immense-river-40491.herokuapp.com/services')
         .then(res => setServices(res.data))
     }, [])
 
     return (
+        <div ref={IMQARef}>
         <section id="services" className="services">
             <h4 className="miniTitle text-center">SERVICES</h4>
             <div className="text-center">
@@ -24,6 +27,7 @@ const Services = () => {
                 }
             </div>
         </section>
+        </div>
     );
 };
 

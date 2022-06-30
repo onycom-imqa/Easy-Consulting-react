@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { UserContext } from '../../../../App';
+import {useIMQA} from "imqa-react-sdk";
 
 
 const useOptions = () => {
@@ -36,6 +37,7 @@ const useOptions = () => {
 };
 
 const Checkout = () => {
+  const IMQARef = useIMQA(); // 삽입
   const { user, selectedService: { name, img, _id, description, price } } = useContext(UserContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -82,6 +84,7 @@ const Checkout = () => {
   };
 
   return (
+      <div ref={IMQARef}>
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Row>
         <Col md={6} xs={12}>
@@ -130,6 +133,7 @@ const Checkout = () => {
         <button className="mainBtn mt-4" type="submit" disabled={!stripe}>Pay Now</button>
       </div>
     </Form>
+      </div>
   );
 };
 

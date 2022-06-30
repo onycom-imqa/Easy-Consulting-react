@@ -1,9 +1,12 @@
 import React from 'react';
 import teamPic from '../../../Assets/about.svg';
 import Fade from 'react-reveal/Fade';
+import {useIMQA} from "imqa-react-sdk";
 
 const About = () => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <section className="about overflow-hidden py-5">
             <div className="row w-100">
                 <div className="row col-md-11 mx-auto ">
@@ -23,6 +26,7 @@ const About = () => {
                 </div>
             </div>
         </section>
+        </div>
     );
 };
 

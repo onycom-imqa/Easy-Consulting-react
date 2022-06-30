@@ -7,8 +7,10 @@ import './PopOver.css';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../App';
 import { handleSignOut } from '../../Login/LoginManager';
+import {useIMQA} from "imqa-react-sdk";
 
 const PopOver = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user: {name,email, img}, setUser} = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
@@ -27,6 +29,7 @@ const PopOver = () => {
         })
     }
     return (
+        <div ref={IMQARef}>
         <div >
             <img src={img} alt="" onClick={handleClick} className="popImg"/>
              <Overlay
@@ -43,8 +46,9 @@ const PopOver = () => {
                         <p className="userEmail">{email}</p>
                         <Button variant="outline-danger" size="sm" onClick={signOut}>Log out</Button>
                     </div>
-                 </Popover> 
-            </Overlay> 
+                 </Popover>
+            </Overlay>
+        </div>
         </div>
     );
 };

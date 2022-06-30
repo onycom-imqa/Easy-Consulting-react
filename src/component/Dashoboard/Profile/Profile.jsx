@@ -5,7 +5,9 @@ import './Profile.css'
 import userimg from '../../../Assets/user.svg';
 import { handleSignOut } from '../../Login/LoginManager';
 import { UserContext } from '../../../App';
+import {useIMQA} from "imqa-react-sdk";
 const Profile = () => {
+    const IMQARef = useIMQA(); // 삽입
     const {user: {name, email, img}, setUser} = useContext(UserContext);
     const signOut = () => {
         const loading = toast.loading('Please wait...');
@@ -17,6 +19,7 @@ const Profile = () => {
         })
     }
     return (
+        <div ref={IMQARef}>
         <Col md={5} className="mx-auto">
             <div className="profile">
                 <h2>Profile</h2>
@@ -28,12 +31,13 @@ const Profile = () => {
                     <h5>
                         {email}
                     </h5>
-                    <button className="mainBtn mt-3" 
+                    <button className="mainBtn mt-3"
                     onClick={signOut}
                     >Log out</button>
                 </div>
             </div>
         </Col>
+        </div>
     );
 };
 

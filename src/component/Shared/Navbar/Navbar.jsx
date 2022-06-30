@@ -8,9 +8,11 @@ import { useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import PopOver from '../PopOver/PopOver';
 import { UserContext } from '../../../App';
+import {useIMQA} from "imqa-react-sdk";
 
 
 const NavBar = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user } = useContext(UserContext)
     const [isSticky, setSticky] = useState(false)
 
@@ -26,6 +28,7 @@ const NavBar = () => {
 
     const scrollTop = () => window['scrollTo']({ top: 0, behavior: 'smooth' });
     return (
+        <div ref={IMQARef}>
         <Navbar className={`navbar navbar-expand-lg navbar-light ${isSticky ? "navStyle" : "navDefault"}`} expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/" onClick={scrollTop} className="navBrn">
@@ -65,6 +68,7 @@ const NavBar = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </div>
     );
 };
 

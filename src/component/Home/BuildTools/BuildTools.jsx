@@ -4,11 +4,14 @@ import { vs2015 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import {useIMQA} from "imqa-react-sdk";
 
 const BuildTools = () => {
+    const IMQARef = useIMQA(); // 삽입
     const theme = useTheme();
 
     return (
+        <div ref={IMQARef}>
         <Box >
             <Box marginBottom={4}>
                 <Box marginBottom={2}>
@@ -64,6 +67,7 @@ const BuildTools = () => {
             </Box>
             </Box>
         </Box>
+        </div>
     )
 }
 

@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
+import {useIMQA} from "imqa-react-sdk";
 
 const data = [
     {
@@ -32,7 +33,9 @@ const data = [
 ];
 
 const BrowserSupport = () => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <Box p={2} mb={2}>
             <Box marginBottom={4} textAlign={'center'}>
                 <Typography
@@ -89,6 +92,7 @@ const BrowserSupport = () => {
                 ))}
             </Grid>
         </Box>
+        </div>
     )
 }
 

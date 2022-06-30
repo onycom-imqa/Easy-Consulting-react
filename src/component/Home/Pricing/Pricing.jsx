@@ -10,15 +10,18 @@ import sPic4 from '../../../Assets/s4.png';
 import sPic5 from '../../../Assets/s5.png';
 import sPic6 from '../../../Assets/s6.png';
 import Spinner from '../../Shared/Spinner/Spinner';
+import {useIMQA} from "imqa-react-sdk";
 const Pricing = () => {
+    const IMQARef = useIMQA(); // 삽입
     return (
+        <div ref={IMQARef}>
         <section className="pricing">
             <h4 className="miniTitle text-center">Pricing</h4>
             <div className="text-center">
                 <h2 className="sectionTitle">CHOOSE PLAN</h2>
             </div>
             <Container>
-                <Tab.Container defaultActiveKey="1"> 
+                <Tab.Container defaultActiveKey="1">
                     <Row>
                         <Col md={10} className="mx-auto">
                             <Nav className="pricingNav">
@@ -65,6 +68,7 @@ const Pricing = () => {
                 </Tab.Container>
             </Container>
         </section>
+        </div>
     );
 };
 

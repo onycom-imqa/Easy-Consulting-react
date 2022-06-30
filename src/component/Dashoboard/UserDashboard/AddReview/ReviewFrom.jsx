@@ -7,8 +7,10 @@ import toast from 'react-hot-toast';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { UserContext } from '../../../../App';
 import swal from 'sweetalert';
+import {useIMQA} from "imqa-react-sdk";
 
 const ReviewForm = ({setIsUpdated}) => {
+    const IMQARef = useIMQA(); // 삽입
     const {user: {email, img}} = useContext(UserContext)
     const {id} = useParams();
     const { register, handleSubmit, reset } = useForm();
@@ -20,7 +22,7 @@ const ReviewForm = ({setIsUpdated}) => {
             setReview(res.data[0]);
         })
     }, [id])
-    
+
     const history = useNavigate ();
     const onSubmit = data => {
         const loading = toast.loading('Uploading...Please wait!');
@@ -29,7 +31,7 @@ const ReviewForm = ({setIsUpdated}) => {
             reviewData.img = review.img || img;
         if(id){
             axios.patch(`https://immense-river-40491.herokuapp.com/updateReview/${id}`, reviewData)
-            
+
             .then(res => {
                 if(res){
                     toast.dismiss(loading);
@@ -59,6 +61,7 @@ const ReviewForm = ({setIsUpdated}) => {
         reset();
     }
     return (
+        <div ref={IMQARef}>
         <section className='px-3'>
             <div className="mx-auto reviewForm">
                 <Form onSubmit={handleSubmit(onSubmit)} className="w-100">
@@ -98,6 +101,7 @@ const ReviewForm = ({setIsUpdated}) => {
                 </Form>
             </div>
         </section>
+        </div>
     );
 };
 

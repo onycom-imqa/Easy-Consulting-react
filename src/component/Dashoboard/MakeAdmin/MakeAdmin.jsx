@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { UserContext } from '../../../App';
+import {useIMQA} from "imqa-react-sdk";
 
 const MakeAdmin = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user: {email} } = useContext(UserContext)
     const { register, handleSubmit, formState: { errors }, reset} = useForm();
 
@@ -29,6 +31,7 @@ const MakeAdmin = () => {
         }
     };
     return (
+        <div ref={IMQARef}>
         <div className="px-2">
             <Form onSubmit={handleSubmit(onSubmit)} className="makeAdmin">
                 <Row>
@@ -48,6 +51,7 @@ const MakeAdmin = () => {
                     </Col>
                 </Row>
             </Form>
+        </div>
         </div>
     )
 };

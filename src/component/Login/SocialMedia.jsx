@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { loginWithProvider } from './LoginManager';
 import toast from 'react-hot-toast';
+import {useIMQA} from "imqa-react-sdk";
 
 const SocialMedia = ({handleResponse}) => {
+    const IMQARef = useIMQA(); // 삽입
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     const fbProvider = new firebase.auth.FacebookAuthProvider();
     const ghProvider = new firebase.auth.GithubAuthProvider();
@@ -23,6 +25,7 @@ const SocialMedia = ({handleResponse}) => {
         })
     }
     return (
+        <div ref={IMQARef}>
         <div className="social-media">
             <div onClick={() => handleSignIn(googleProvider)} className="social-icon">
                 <FontAwesomeIcon icon={faGoogle}/>
@@ -33,6 +36,7 @@ const SocialMedia = ({handleResponse}) => {
             <div onClick={() => handleSignIn(ghProvider)} className="social-icon">
                 <FontAwesomeIcon icon={faGithub}/>
             </div>
+        </div>
         </div>
     );
 };

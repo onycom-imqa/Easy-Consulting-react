@@ -6,8 +6,10 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import SwiperCore, { Autoplay, Pagination } from 'swiper/core'
 import Spinner from '../../Shared/Spinner/Spinner';
+import {useIMQA} from "imqa-react-sdk";
 
 const Reviews = () => {
+    const IMQARef = useIMQA(); // 삽입
     SwiperCore.use([Pagination, Autoplay]);
     const [reviews, setReviews] = useState([])
     useEffect(() => {
@@ -18,13 +20,14 @@ const Reviews = () => {
         })
     }, [])
     return (
+        <div ref={IMQARef}>
         <section id="testimonial">
             <h4 className="miniTitle text-center">TESTIMONIALS</h4>
             <div className="text-center mb-4">
                 <h3 className="sectionTitle">WHAT OUR CLIENTS SAY’S</h3>
             </div>
             <Col md={11} className="mx-auto">
-                <Swiper 
+                <Swiper
                     pagination={{ clickable: true }}
                     slidesPerView={3}
                     breakpoints={{
@@ -47,12 +50,12 @@ const Reviews = () => {
                     }}
                     spaceBetween={10}
                     >
-                    
+
                     {
-                        reviews.length === 0 ? 
+                        reviews.length === 0 ?
                             <div className="text-center">
                                 <Spinner/>
-                            </div>: 
+                            </div>:
                             reviews.map((review, id) => {
                                 return(
                                     <SwiperSlide key={id}>
@@ -64,6 +67,7 @@ const Reviews = () => {
                 </Swiper>
             </Col>
         </section>
+        </div>
     );
 };
 

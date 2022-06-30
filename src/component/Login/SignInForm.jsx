@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import SocialMedia from './SocialMedia';
 import toast from 'react-hot-toast';
+import {useIMQA} from "imqa-react-sdk";
 
 
 const SignInForm = ({handleResponse}) => {
+    const IMQARef = useIMQA(); // 삽입
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = ({email, password}) => {
@@ -23,6 +25,7 @@ const SignInForm = ({handleResponse}) => {
         })
     }
     return (
+        <div ref={IMQARef}>
         <form onSubmit={handleSubmit(onSubmit)} className="sign-in-form">
             <h2 className="title">Sign in</h2>
             <div className="input-field">
@@ -39,6 +42,7 @@ const SignInForm = ({handleResponse}) => {
             <p className="social-text">Or Sign in with social platforms</p>
             <SocialMedia handleResponse={handleResponse}/>
         </form>
+        </div>
     );
 };
 

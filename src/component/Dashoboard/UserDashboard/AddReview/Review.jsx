@@ -11,9 +11,11 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
+import {useIMQA} from "imqa-react-sdk";
 
 
 const Review = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user: {email, img} } = useContext(UserContext);
     const [review, setReview] = useState({});
     const [isUpdated, setIsUpdated] = useState(false)
@@ -56,10 +58,11 @@ const Review = () => {
                         icon: "error",
                       });
                 })
-            } 
+            }
           });
     }
     return (
+        <div ref={IMQARef}>
         <div>
             { description ?
             <div className="userReviewBox">
@@ -74,8 +77,9 @@ const Review = () => {
                 <Button variant="outline-danger" onClick={() => handleDelete(_id)}> <FontAwesomeIcon icon={faTrashAlt}/> Delete</Button>
             </div>
             :
-            <ReviewForm setIsUpdated={setIsUpdated}/> 
+            <ReviewForm setIsUpdated={setIsUpdated}/>
             }
+        </div>
         </div>
     );
 };

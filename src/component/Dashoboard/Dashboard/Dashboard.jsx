@@ -9,8 +9,10 @@ import './Dashboard.css';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { UserContext } from '../../../App';
+import {useIMQA} from "imqa-react-sdk";
 
 const Dashboard = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user, admin, setAdmin } = useContext(UserContext);
     const [sideToggle, setSideToggle] = useState(false)
     const [title, setTitle] = useState('Easy Consulting')
@@ -25,13 +27,14 @@ const Dashboard = () => {
     },[user.email, admin, setAdmin])
 
     return (
+        <div ref={IMQARef}>
         <div id="dashboard">
             <div id="sidebar" className={ sideToggle ? "active" : "" }>
                 <div className="sidebarContent">
                     <Sidebar setTitle={setTitle}/>
                     <div className="backBtnBox">
                         <Link to="/">
-                            <button className="backBtn"> 
+                            <button className="backBtn">
                             <FontAwesomeIcon icon={faSignOutAlt}/>
                              back to home</button>
                         </Link>
@@ -53,12 +56,13 @@ const Dashboard = () => {
                         </div>
                         <h3>{title}</h3>
                     </div>
-                    <PopOver/> 
+                    <PopOver/>
                 </div>
                  {
                     admin ? <AdminDashboard/> : <UserDashboard/>
-                } 
+                }
             </div>
+        </div>
         </div>
     )
 }

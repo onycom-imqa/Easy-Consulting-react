@@ -13,8 +13,10 @@ import { UserContext } from '../../App';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { handleSignOut } from './LoginManager';
+import {useIMQA} from "imqa-react-sdk";
 
 const Form = () => {
+    const IMQARef = useIMQA(); // 삽입
   const [isSignUp, setSignUp] = useState(false);
   const { setUser } = useContext(UserContext);
 
@@ -46,8 +48,9 @@ const Form = () => {
         });
     }
   }
-  
+
   return (
+      <div ref={IMQARef}>
     <div className={`${ isSignUp ? "fContainer sign-up-mode" : "fContainer"}`}>
         <Link to="/">
           <span className="pageCloseBtn"><FontAwesomeIcon icon={faTimes} /></span>
@@ -78,6 +81,7 @@ const Form = () => {
             <img src={`${desk}`} alt="" className="pImg"/>
           </div>
        </div>
+    </div>
     </div>
   );
 };

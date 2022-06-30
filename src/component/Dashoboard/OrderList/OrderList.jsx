@@ -4,8 +4,10 @@ import { Table } from 'react-bootstrap';
 import TableLoader from '../../Shared/TableOrder/TableOrder';
 import Order from './Order';
 import './OrderList.css'
+import {useIMQA} from "imqa-react-sdk";
 
 const OrderList = () => {
+    const IMQARef = useIMQA(); // 삽입
     const [orders, setOrders] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
 
@@ -19,13 +21,14 @@ const OrderList = () => {
         axios.patch(`https://immense-river-40491.herokuapp.com/statusUpdate/${id}`, {status: status })
         .then(res => res.data && setIsUpdated(false))
     }
-    
+
     return (
+        <div ref={IMQARef}>
         <div className="px-2">
             {
-                orders.length === 0 ? 
-                <TableLoader/> 
-                : 
+                orders.length === 0 ?
+                <TableLoader/>
+                :
                 <div className="orderList">
                     <Table hover>
                         <thead>
@@ -44,7 +47,8 @@ const OrderList = () => {
                     </Table>
                 </div>
             }
-            
+
+        </div>
         </div>
     );
 };

@@ -8,8 +8,10 @@ import { UserContext } from '../../../../App';
 import './BookList.css'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import ListSkeleton from '../../../Shared/TableOrder/ListSkeleton';
+import {useIMQA} from "imqa-react-sdk";
 
 const BookList = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { user } = useContext(UserContext);
     const [bookings, setBookings] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
@@ -50,10 +52,11 @@ const BookList = () => {
                         icon: "error",
                       });
                 })
-            } 
+            }
           });
     }
     return (
+        <div ref={IMQARef}>
         <div>
             {bookings.length === 0 && <ListSkeleton/>}
             <div className="row px-3">
@@ -69,7 +72,7 @@ const BookList = () => {
                                 </div>
                                 <h6>{serviceName}</h6>
                                 <p>{description}</p>
-                                <Button variant="outline-danger" onClick={() => handleDelete(_id, status)}> 
+                                <Button variant="outline-danger" onClick={() => handleDelete(_id, status)}>
                                     <FontAwesomeIcon icon={faTimesCircle}/>
                                      { status === 'Done' ? 'Remove':'Cancel'}
                                 </Button>
@@ -78,6 +81,7 @@ const BookList = () => {
                     })
                 }
             </div>
+        </div>
         </div>
     );
 };

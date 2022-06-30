@@ -10,8 +10,10 @@ import swal from 'sweetalert';
 import { UserContext } from '../../../App';
 import TableLoader from '../../Shared/TableOrder/TableOrder';
 import AddService from '../AddService/AddService';
+import {useIMQA} from "imqa-react-sdk";
 
 const ManageServices = () => {
+    const IMQARef = useIMQA(); // 삽입
     const {user : { email }} = useContext(UserContext)
     const [services, setServices] = useState([])
     const [isUpdated, setIsUpdated] = useState(false)
@@ -24,11 +26,11 @@ const ManageServices = () => {
             setIsUpdated(false)
         })
     }, [isUpdated, edit])
-    
+
     const checkPermission = (id, action) => {
         const getMainServices = services.slice(0, 6)
         const getService = getMainServices.find(({_id}) => id === _id)
-        
+
         if(getService && email === "test@admin.com"){
             swal("Permission restriction!","As a test admin, you can't edit or delete the main six services. You can only edit or delete your added services", "info" )
         } else {
@@ -71,15 +73,16 @@ const ManageServices = () => {
                         icon: "error",
                       });
                 })
-            } 
+            }
           })
     }
 
     return (
+        <div ref={IMQARef}>
         <>
-        { edit ? 
-            <AddService edit={edit} setEdit={setEdit} services={services}/> 
-            : 
+        { edit ?
+            <AddService edit={edit} setEdit={setEdit} services={services}/>
+            :
             services.length === 0 ?
             <TableLoader/>
             :
@@ -104,10 +107,10 @@ const ManageServices = () => {
                                         <td>{des ? des : "Nothing"}</td>
                                         <td>${price}</td>
                                         <td>
-                                            <Button variant="outline-success" onClick={() => checkPermission(_id, 'edit')}> 
+                                            <Button variant="outline-success" onClick={() => checkPermission(_id, 'edit')}>
                                             <FontAwesomeIcon icon={faEdit}/>
                                              Edit</Button>
-                                            <Button className="ml-2" variant="outline-danger" onClick={() => checkPermission(_id, 'delete')}> 
+                                            <Button className="ml-2" variant="outline-danger" onClick={() => checkPermission(_id, 'delete')}>
                                             <FontAwesomeIcon icon={faTrashAlt}/>
                                              Delete</Button>
                                         </td>
@@ -120,6 +123,7 @@ const ManageServices = () => {
             </div>
         }
         </>
+        </div>
     );
 };
 

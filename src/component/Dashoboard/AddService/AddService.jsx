@@ -7,8 +7,10 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import './AddService.css'
+import { useIMQA } from "imqa-react-sdk"; // 삽입
 
 const AddService = ({edit, setEdit, services}) => {
+    const IMQARef = useIMQA(); // 삽입
     const { register, handleSubmit, reset } = useForm();
     const [imgURL, setImgURL] = useState(null);
     const [service, setService] = useState({})
@@ -31,7 +33,7 @@ const AddService = ({edit, setEdit, services}) => {
             axios.patch(`https://immense-river-40491.herokuapp.com/updateService/${edit}`, serviceInfo)
             .then(res =>{
                 toast.dismiss(loading)
-                if( data.name === name  && 
+                if( data.name === name  &&
                     data.price === price &&
                     data.description === description){
                         toast.error("You haven't change anything")
@@ -76,6 +78,7 @@ const AddService = ({edit, setEdit, services}) => {
         });
     }
     return (
+        <div ref={IMQARef}>
         <div className="px-2">
             <Form onSubmit={handleSubmit(onSubmit)} className="addServiceForm">
                 <Row className="justify-content-center px-4">
@@ -126,6 +129,7 @@ const AddService = ({edit, setEdit, services}) => {
                     <Button type="submit" className="mainBtn" disabled={isDisabled}>{edit? 'Update':'Submit'}</Button>
                 </div>
             </Form>
+        </div>
         </div>
     );
 };

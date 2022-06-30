@@ -7,8 +7,10 @@ import './Book.css'
 import axios from 'axios';
 import ifoIcon from '../../../../Assets/info.svg';
 import Checkout from './Checkout';
+import {useIMQA} from "imqa-react-sdk";
 
 const Book = () => {
+    const IMQARef = useIMQA(); // 삽입
     const { selectedService , setSelectedService } = useContext(UserContext)
     const [services, setServices] = useState([]);
     const [show, setShow] = useState(true);
@@ -34,6 +36,7 @@ const Book = () => {
     }, 7000)
 
     return (
+        <div ref={IMQARef}>
         <div className="bookForm">
             <Toast show={show} onClose={() => setShow(!show)} className="bookToast">
                 <Toast.Header>
@@ -47,11 +50,11 @@ const Book = () => {
                 <Col md={6} xs={12} className="my-3">
                     <Form.Label style={{ fontWeight: "bold" }}>Service</Form.Label>
                     <select class="form-select" onChange={handleSelection}>
-                        {selectedService.name && 
-                             <option className="activeService" value={selectedService.name}>{selectedService.name}</option> 
-                         } 
-                        { 
-                         services?.map(({id, name}) => <option key={id} value={name}>{name}</option>) 
+                        {selectedService.name &&
+                             <option className="activeService" value={selectedService.name}>{selectedService.name}</option>
+                         }
+                        {
+                         services?.map(({id, name}) => <option key={id} value={name}>{name}</option>)
                         }
                     </select>
                 </Col>
@@ -66,6 +69,7 @@ const Book = () => {
             <Elements stripe={stripePromise}>
                 <Checkout/>
             </Elements>
+        </div>
         </div>
     );
 };
